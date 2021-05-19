@@ -39,7 +39,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                     SizedBox(height: 20),
                     Text(
-                      'FlutterFire',
+                      '파이어베이스',
                       style: TextStyle(
                         color: Colors.yellow,
                         fontSize: 40,
