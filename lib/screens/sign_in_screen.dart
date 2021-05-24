@@ -39,7 +39,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                     SizedBox(height: 20),
                     Text(
-                      '파이어베이스',
+                      'Recruitment',
                       style: TextStyle(
                         color: Colors.yellow,
                         fontSize: 40,
