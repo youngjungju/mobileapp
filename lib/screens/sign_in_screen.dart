@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:mobileapp/utils/authentication.dart';
 import 'package:mobileapp/widgets/google_sign_in_button.dart';
 
-
 class SignInScreen extends StatefulWidget {
   @override
   _SignInScreenState createState() => _SignInScreenState();
@@ -39,16 +38,9 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                     SizedBox(height: 20),
                     Text(
-                      '파이어베이스',
+                      '인재의 전당',
                       style: TextStyle(
                         color: Colors.yellow,
-                        fontSize: 40,
-                      ),
-                    ),
-                    Text(
-                      'Authentication',
-                      style: TextStyle(
-                        color: Colors.orange,
                         fontSize: 40,
                       ),
                     ),
