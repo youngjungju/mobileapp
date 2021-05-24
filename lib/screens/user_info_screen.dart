@@ -53,7 +53,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.indigo,
-        title: Text("정주영"),
+        title: Text("인재의 전당"),
       ),
       body: SafeArea(
         child: Padding(
