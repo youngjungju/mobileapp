@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobileapp/screens/home_screen.dart';
 import 'package:mobileapp/utils/authentication.dart';
+import 'package:mobileapp/utils/database.dart';
 
 class GoogleSignInButton extends StatefulWidget {
   @override
@@ -42,6 +43,7 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                 });
 
                 if (user != null) {
+                  Database.userUid = user.uid;
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
                       builder: (context) => HomeScreen(

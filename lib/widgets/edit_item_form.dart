@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'package:flutterfire_samples/res/custom_colors.dart';
-import 'package:flutterfire_samples/utils/database.dart';
-import 'package:flutterfire_samples/utils/validator.dart';
+import 'package:mobileapp/utils/database.dart';
+import 'package:mobileapp/utils/validator.dart';
 
 import 'custom_form_field.dart';
 
@@ -64,7 +62,7 @@ class _EditItemFormState extends State<EditItemForm> {
                 Text(
                   'Title',
                   style: TextStyle(
-                    color: CustomColors.firebaseGrey,
+                    color: Colors.white,
                     fontSize: 22.0,
                     letterSpacing: 1,
                     fontWeight: FontWeight.bold,
@@ -87,7 +85,7 @@ class _EditItemFormState extends State<EditItemForm> {
                 Text(
                   'Description',
                   style: TextStyle(
-                    color: CustomColors.firebaseGrey,
+                    color: Colors.white,
                     fontSize: 22.0,
                     letterSpacing: 1,
                     fontWeight: FontWeight.bold,
@@ -115,7 +113,7 @@ class _EditItemFormState extends State<EditItemForm> {
                   padding: const EdgeInsets.all(16.0),
                   child: CircularProgressIndicator(
                     valueColor: AlwaysStoppedAnimation<Color>(
-                      CustomColors.firebaseOrange,
+                      Colors.orange,
                     ),
                   ),
                 )
@@ -124,7 +122,7 @@ class _EditItemFormState extends State<EditItemForm> {
                   child: ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
-                        CustomColors.firebaseOrange,
+                        Colors.orange,
                       ),
                       shape: MaterialStateProperty.all(
                         RoundedRectangleBorder(
@@ -161,7 +159,7 @@ class _EditItemFormState extends State<EditItemForm> {
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
-                          color: CustomColors.firebaseGrey,
+                          color: Colors.white,
                           letterSpacing: 2,
                         ),
                       ),

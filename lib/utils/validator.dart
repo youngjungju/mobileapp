@@ -3,7 +3,6 @@ class Validator {
     if (value.isEmpty) {
       return 'Field can\'t be empty';
     }
-
     return null;
   }
 }

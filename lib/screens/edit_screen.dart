@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutterfire_samples/res/custom_colors.dart';
-import 'package:flutterfire_samples/utils/database.dart';
-import 'package:flutterfire_samples/widgets/app_bar_title.dart';
-import 'package:flutterfire_samples/widgets/edit_item_form.dart';
+import 'package:mobileapp/utils/database.dart';
+import 'package:mobileapp/widgets/edit_item_form.dart';
 
 class EditScreen extends StatefulWidget {
   final String currentTitle;
@@ -34,11 +32,11 @@ class _EditScreenState extends State<EditScreen> {
         _descriptionFocusNode.unfocus();
       },
       child: Scaffold(
-        backgroundColor: CustomColors.firebaseNavy,
+        backgroundColor: Colors.indigo,
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: CustomColors.firebaseNavy,
-          title: AppBarTitle(),
+          backgroundColor: Colors.indigo,
+          title: Text('수정'),
           actions: [
             _isDeleting
                 ? Padding(
