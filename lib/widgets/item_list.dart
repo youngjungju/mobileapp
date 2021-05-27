@@ -33,8 +33,6 @@ class ItemList extends StatelessWidget {
                   onTap: () => Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => DetailScreen(
-                        title: title,
-                        description: description,
                         documentId: docID,
                       ),
                     ),
