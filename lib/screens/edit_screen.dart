@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mobileapp/utils/database.dart';
 import 'package:mobileapp/widgets/edit_item_form.dart';
 
+import 'home_screen.dart';
+
 class EditScreen extends StatefulWidget {
   final String currentTitle;
   final String currentDescription;
@@ -72,6 +74,9 @@ class _EditScreenState extends State<EditScreen> {
                       });
 
                       Navigator.of(context).pop();
+                      Navigator.of(context).pop();
+                      // Navigator.popUntil(context, ModalRoute.withName(name)
+                      // );
                     },
                   ),
           ],
