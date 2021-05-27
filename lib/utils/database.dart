@@ -20,15 +20,8 @@ class Database {
 
     await documentReferencer
         .set(data)
-        .whenComplete(() => print("Notes item added to the database"))
+        .whenComplete(() => print("Note item added to the database"))
         .catchError((e) => print(e));
-  }
-
-  static Stream<QuerySnapshot> readItems() {
-    CollectionReference notesItemCollection =
-    _mainCollection.doc(userUid).collection('items');
-
-    return notesItemCollection.snapshots();
   }
 
   static Future<void> updateItem({
@@ -61,7 +54,5 @@ class Database {
         .whenComplete(() => print('Note item deleted from the database'))
         .catchError((e) => print(e));
   }
-
-
-
 }
+
