@@ -24,13 +24,6 @@ class Database {
         .catchError((e) => print(e));
   }
 
-  static Stream<QuerySnapshot> readItems() {
-    CollectionReference notesItemCollection =
-    _mainCollection;
-
-    return notesItemCollection.snapshots();
-  }
-
   static Future<void> updateItem({
     required String title,
     required String description,
@@ -48,6 +41,14 @@ class Database {
         .update(data)
         .whenComplete(() => print("Note item updated in the database"))
         .catchError((e) => print(e));
+  }
+
+
+  static Stream<QuerySnapshot> readItems() {
+    CollectionReference hrListCollection =
+    _mainCollection;
+
+    return hrListCollection.snapshots();
   }
 
   static Future<void> deleteItem({

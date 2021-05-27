@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:mobileapp/screens/edit_screen.dart';
+import 'package:mobileapp/screens/detail_screen.dart';
 import 'package:mobileapp/utils/database.dart';
 
 class ItemList extends StatelessWidget {
@@ -32,9 +32,9 @@ class ItemList extends StatelessWidget {
                   ),
                   onTap: () => Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => EditScreen(
-                        currentTitle: title,
-                        currentDescription: description,
+                      builder: (context) => DetailScreen(
+                        title: title,
+                        description: description,
                         documentId: docID,
                       ),
                     ),
