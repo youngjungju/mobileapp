@@ -1,10 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterfire_samples/res/custom_colors.dart';
-import 'package:flutterfire_samples/screens/edit_screen.dart';
-import 'package:flutterfire_samples/utils/database.dart';
+import 'package:mobileapp/screens/detail_screen.dart';
+import 'package:mobileapp/utils/database.dart';
 
 class ItemList extends StatelessWidget {
+  ItemList({Key? key, required User user})
+      : _user = user,
+        super(key: key);
+
+  final User _user;
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
@@ -17,14 +23,14 @@ class ItemList extends StatelessWidget {
             separatorBuilder: (context, index) => SizedBox(height: 16.0),
             itemCount: snapshot.data!.docs.length,
             itemBuilder: (context, index) {
-              var noteInfo = snapshot.data!.docs[index].data()!;
-              String docID = snapshot.data!.docs[index].id;
-              String title = noteInfo['title'];
-              String description = noteInfo['description'];
+              var noteInfo = snapshot.data!.docs[index];
+              String docID = noteInfo.id;
+              String title = noteInfo.get('title');
+              String description = noteInfo.get('description');
 
               return Ink(
                 decoration: BoxDecoration(
-                  color: CustomColors.firebaseGrey.withOpacity(0.1),
+                  color: Colors.grey.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: ListTile(
@@ -33,10 +39,9 @@ class ItemList extends StatelessWidget {
                   ),
                   onTap: () => Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => EditScreen(
-                        currentTitle: title,
-                        currentDescription: description,
+                      builder: (context) => DetailScreen(
                         documentId: docID,
+                        user: _user,
                       ),
                     ),
                   ),
@@ -59,7 +64,7 @@ class ItemList extends StatelessWidget {
         return Center(
           child: CircularProgressIndicator(
             valueColor: AlwaysStoppedAnimation<Color>(
-              CustomColors.firebaseOrange,
+              Colors.orange,
             ),
           ),
         );

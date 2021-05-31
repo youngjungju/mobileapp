@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutterfire_samples/res/custom_colors.dart';
-import 'package:flutterfire_samples/widgets/add_item_form.dart';
-import 'package:flutterfire_samples/widgets/app_bar_title.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mobileapp/widgets/add_item_form.dart';
 
 class AddScreen extends StatelessWidget {
+  AddScreen({Key? key, required User user})
+      : _user = user,
+        super(key: key);
+
+  final User _user;
+
   final FocusNode _titleFocusNode = FocusNode();
   final FocusNode _descriptionFocusNode = FocusNode();
 
@@ -15,11 +20,11 @@ class AddScreen extends StatelessWidget {
         _descriptionFocusNode.unfocus();
       },
       child: Scaffold(
-        backgroundColor: CustomColors.firebaseNavy,
+        backgroundColor: Colors.indigo,
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: CustomColors.firebaseNavy,
-          title: AppBarTitle(),
+          backgroundColor: Colors.indigo,
+          title: Text('추가'),
         ),
         body: SafeArea(
           child: Padding(
@@ -31,6 +36,7 @@ class AddScreen extends StatelessWidget {
             child: AddItemForm(
               titleFocusNode: _titleFocusNode,
               descriptionFocusNode: _descriptionFocusNode,
+              user: _user,
             ),
           ),
         ),

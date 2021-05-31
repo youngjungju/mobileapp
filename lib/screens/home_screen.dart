@@ -1,7 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:mobileapp/screens/user_info_screen.dart';
+import 'package:mobileapp/screens/add_screen.dart';
+import 'package:mobileapp/widgets/item_list.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key, required User user})
@@ -69,6 +71,21 @@ class _HomeScreenState extends State<HomeScreen> {
               ))
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => AddScreen(user: _user),
+            ),
+          );
+        },
+        backgroundColor: Colors.orange,
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+          size: 32,
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(
@@ -76,10 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
             right: 16.0,
             bottom: 20.0,
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [],
-          ),
+          child: ItemList(user: _user),
         ),
       ),
     );
