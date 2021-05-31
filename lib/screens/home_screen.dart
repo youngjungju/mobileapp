@@ -26,10 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
-  // final FocusNode _nameFocusNode = FocusNode();
-  // final FocusNode _emailFocusNode = FocusNode();
-  // final FocusNode _passwordFocusNode = FocusNode();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => AddScreen(),
+              builder: (context) => AddScreen(user: _user),
             ),
           );
         },
@@ -97,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
             right: 16.0,
             bottom: 20.0,
           ),
-          child: ItemList(),
+          child: ItemList(user: _user),
         ),
       ),
     );

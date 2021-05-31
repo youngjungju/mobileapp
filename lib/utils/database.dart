@@ -16,11 +16,12 @@ class Database {
     Map<String, dynamic> data = <String, dynamic>{
       "title": title,
       "description": description,
+      "writer": userUid,
     };
 
     await documentReferencer
         .set(data)
-        .whenComplete(() => print("Note item added to the database"))
+        .whenComplete(() => print("Added to the database"))
         .catchError((e) => print(e));
   }
 

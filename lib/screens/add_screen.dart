@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mobileapp/widgets/add_item_form.dart';
 
 class AddScreen extends StatelessWidget {
+  AddScreen({Key? key, required User user})
+      : _user = user,
+        super(key: key);
+
+  final User _user;
+
   final FocusNode _titleFocusNode = FocusNode();
   final FocusNode _descriptionFocusNode = FocusNode();
 
@@ -29,6 +36,7 @@ class AddScreen extends StatelessWidget {
             child: AddItemForm(
               titleFocusNode: _titleFocusNode,
               descriptionFocusNode: _descriptionFocusNode,
+              user: _user,
             ),
           ),
         ),

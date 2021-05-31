@@ -1,9 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mobileapp/screens/detail_screen.dart';
 import 'package:mobileapp/utils/database.dart';
 
 class ItemList extends StatelessWidget {
+  ItemList({Key? key, required User user})
+      : _user = user,
+        super(key: key);
+
+  final User _user;
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
@@ -34,6 +41,7 @@ class ItemList extends StatelessWidget {
                     MaterialPageRoute(
                       builder: (context) => DetailScreen(
                         documentId: docID,
+                        user: _user,
                       ),
                     ),
                   ),

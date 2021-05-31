@@ -1,33 +1,46 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:mobileapp/utils/database.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'edit_screen.dart';
 
 class DetailScreen extends StatefulWidget {
-  //TODO: ID만 받아와서 직접 참조하기
   final String documentId;
+  final User _user;
 
-  DetailScreen({
-    required this.documentId,
-  });
+  const DetailScreen({Key? key, required User user, required String documentId})
+      : _user = user,
+        documentId = documentId,
+        super(key: key);
 
   @override
   _DetailScreenState createState() => _DetailScreenState();
 }
 
 class _DetailScreenState extends State<DetailScreen> {
+  late User _user;
+  @override
+  void initState() {
+    _user = widget._user;
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<DocumentSnapshot>(
-        stream: FirebaseFirestore.instance.collection('hr_list').doc(widget.documentId).snapshots(),
+        stream: FirebaseFirestore.instance
+            .collection('hr_list')
+            .doc(widget.documentId)
+            .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Text('Something went wrong');
           } else if (snapshot.hasData || snapshot.data != null) {
             var noteInfo = snapshot.data;
             String docID = widget.documentId;
-            String title = noteInfo!.get('title');
-            String description = noteInfo!.get('description');
+            String title = noteInfo?.get('title');
+            String description = noteInfo?.get('description');
+            String writer = noteInfo?.get('writer');
             return Scaffold(
               backgroundColor: Colors.indigo,
               appBar: AppBar(
@@ -36,21 +49,20 @@ class _DetailScreenState extends State<DetailScreen> {
                   title: Text("인재 정보"),
                   centerTitle: true,
                   actions: [
-                    //TODO: _isMine? 버튼 띄워주기 : 띄워주지 말기
-                    IconButton(
-                        onPressed: () {
-                          print("Edit Button");
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) =>
-                                EditScreen(
-                                  //TODO: ID만 넘겨주기
-                                  currentTitle: title,
-                                  currentDescription: description,
-                                  documentId: docID,
-                                ),
-                          ));
-                        },
-                        icon: Icon(Icons.edit)),
+                    if (_user.uid == writer)
+                      IconButton(
+                          onPressed: () {
+                            print("Edit Button");
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => EditScreen(
+                                //TODO: ID만 넘겨주기
+                                currentTitle: title,
+                                currentDescription: description,
+                                documentId: docID,
+                              ),
+                            ));
+                          },
+                          icon: Icon(Icons.edit)),
                   ]),
               body: SafeArea(
                 child: Padding(
@@ -110,6 +122,6 @@ class _DetailScreenState extends State<DetailScreen> {
               ),
             ),
           );
-    });
+        });
   }
 }
