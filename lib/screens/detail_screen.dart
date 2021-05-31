@@ -55,7 +55,6 @@ class _DetailScreenState extends State<DetailScreen> {
                             print("Edit Button");
                             Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => EditScreen(
-                                //TODO: ID만 넘겨주기
                                 currentTitle: title,
                                 currentDescription: description,
                                 documentId: docID,
@@ -71,7 +70,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     right: 16.0,
                     bottom: 20.0,
                   ),
-                  child: Column(
+                  child: ListView(
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(
@@ -84,7 +83,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           children: [
                             SizedBox(height: 24.0),
                             Text(
-                              'Title',
+                              '제목',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 22.0,
@@ -96,7 +95,7 @@ class _DetailScreenState extends State<DetailScreen> {
                             Container(child: Text(title)),
                             SizedBox(height: 24.0),
                             Text(
-                              'Description',
+                              '자기소개서',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 22.0,
