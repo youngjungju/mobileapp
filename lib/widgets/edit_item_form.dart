@@ -47,7 +47,7 @@ class _EditItemFormState extends State<EditItemForm> {
   Widget build(BuildContext context) {
     return Form(
       key: _editItemFormKey,
-      child: Column(
+      child: ListView(
         children: [
           Padding(
             padding: const EdgeInsets.only(
@@ -60,7 +60,7 @@ class _EditItemFormState extends State<EditItemForm> {
               children: [
                 SizedBox(height: 24.0),
                 Text(
-                  'Title',
+                  '이력서 제목',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 22.0,
@@ -75,15 +75,15 @@ class _EditItemFormState extends State<EditItemForm> {
                   focusNode: widget.titleFocusNode,
                   keyboardType: TextInputType.text,
                   inputAction: TextInputAction.next,
-                  validator: (value) => Validator.validateField(
+                  validator: (value) => TitleValidator.validateField(
                     value: value,
                   ),
-                  label: 'Title',
-                  hint: 'Enter your note title',
+                  label: '이력서 제목',
+                  hint: '자신을 어필할 수 있는 이력서 제목을 입력해주세요.',
                 ),
                 SizedBox(height: 24.0),
                 Text(
-                  'Description',
+                  '자기소개서',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 22.0,
@@ -99,11 +99,11 @@ class _EditItemFormState extends State<EditItemForm> {
                   focusNode: widget.descriptionFocusNode,
                   keyboardType: TextInputType.text,
                   inputAction: TextInputAction.done,
-                  validator: (value) => Validator.validateField(
+                  validator: (value) => TitleValidator.validateField(
                     value: value,
                   ),
-                  label: 'Description',
-                  hint: 'Enter your note description',
+                  label: '자기소개서',
+                  hint: '간단한 자기소개를 입력해주세요.(500자 이내)',
                 ),
               ],
             ),
@@ -155,7 +155,7 @@ class _EditItemFormState extends State<EditItemForm> {
                     child: Padding(
                       padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
                       child: Text(
-                        'UPDATE ITEM',
+                        '이력서 저장',
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
