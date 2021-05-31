@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mobileapp/utils/database.dart';
 import 'package:mobileapp/utils/validator.dart';
 import 'custom_form_field.dart';
@@ -6,10 +7,12 @@ import 'custom_form_field.dart';
 class AddItemForm extends StatefulWidget {
   final FocusNode titleFocusNode;
   final FocusNode descriptionFocusNode;
+  final User user;
 
   const AddItemForm({
     required this.titleFocusNode,
     required this.descriptionFocusNode,
+    required this.user,
   });
 
   @override
