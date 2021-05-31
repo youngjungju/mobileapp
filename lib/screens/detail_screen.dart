@@ -26,8 +26,8 @@ class _DetailScreenState extends State<DetailScreen> {
           } else if (snapshot.hasData || snapshot.data != null) {
             var noteInfo = snapshot.data;
             String docID = widget.documentId;
-            String title = noteInfo!.get('title');
-            String description = noteInfo!.get('description');
+            String title = noteInfo?.get('title');
+            String description = noteInfo?.get('description');
             return Scaffold(
               backgroundColor: Colors.indigo,
               appBar: AppBar(
