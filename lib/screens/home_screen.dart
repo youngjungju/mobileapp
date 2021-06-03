@@ -18,12 +18,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late User _user;
+  late String currentLocation;
 
   @override
   void initState() {
     _user = widget._user;
 
     super.initState();
+    currentLocation = "양덕동";
   }
 
   @override
@@ -33,7 +35,33 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.indigo,
-        title: Text("전체 인재"),
+        title: GestureDetector(
+          onTap: () {
+            print("click");
+          },
+          child: PopupMenuButton<String>(
+            offset: Offset(0,30),
+            onSelected: (String where){
+              setState(() {
+                currentLocation = where;
+              });
+            },
+            itemBuilder: (BuildContext context) {
+              return [
+                PopupMenuItem(value: "양덕동",child: Text("양덕동")),
+                PopupMenuItem(value: "장량동",child: Text("장량동")),
+                PopupMenuItem(value: "두호동",child: Text("두호동")),
+              ];
+            },
+            child: Row(
+              children: [
+                Text(currentLocation),
+                Icon(Icons.arrow_drop_down),
+              ],
+            ),
+          ),
+        ),
+        //title: Text("전체 인재"),
         actions: [
           Padding(
               padding: const EdgeInsets.all(5.0),

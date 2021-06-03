@@ -7,14 +7,18 @@ import 'custom_form_field.dart';
 class EditItemForm extends StatefulWidget {
   final FocusNode titleFocusNode;
   final FocusNode descriptionFocusNode;
+  final FocusNode cityFocusNode;
   final String currentTitle;
   final String currentDescription;
+  final String currentCity;
   final String documentId;
 
   const EditItemForm({
     required this.titleFocusNode,
     required this.descriptionFocusNode,
+    required this.cityFocusNode,
     required this.currentTitle,
+    required this.currentCity,
     required this.currentDescription,
     required this.documentId,
   });
@@ -30,6 +34,7 @@ class _EditItemFormState extends State<EditItemForm> {
 
   late TextEditingController _titleController;
   late TextEditingController _descriptionController;
+  late TextEditingController _cityController;
 
   @override
   void initState() {
@@ -39,6 +44,10 @@ class _EditItemFormState extends State<EditItemForm> {
 
     _descriptionController = TextEditingController(
       text: widget.currentDescription,
+    );
+
+    _cityController = TextEditingController(
+      text: widget.currentCity,
     );
     super.initState();
   }
@@ -80,6 +89,29 @@ class _EditItemFormState extends State<EditItemForm> {
                   ),
                   label: '이력서 제목',
                   hint: '자신을 어필할 수 있는 이력서 제목을 입력해주세요.',
+                ),
+                SizedBox(height: 24.0),
+                Text(
+                  '지역',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 22.0,
+                    letterSpacing: 1,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 8.0),
+                CustomFormField(
+                  isLabelEnabled: false,
+                  controller: _cityController,
+                  focusNode: widget.cityFocusNode,
+                  keyboardType: TextInputType.text,
+                  inputAction: TextInputAction.next,
+                  validator: (value) => TitleValidator.validateField(
+                    value: value,
+                  ),
+                  label: '지역',
+                  hint: '포항시 북구 양덕동',
                 ),
                 SizedBox(height: 24.0),
                 Text(
@@ -133,6 +165,7 @@ class _EditItemFormState extends State<EditItemForm> {
                     onPressed: () async {
                       widget.titleFocusNode.unfocus();
                       widget.descriptionFocusNode.unfocus();
+                      widget.cityFocusNode.unfocus();
 
                       if (_editItemFormKey.currentState!.validate()) {
                         setState(() {
@@ -143,6 +176,7 @@ class _EditItemFormState extends State<EditItemForm> {
                           docId: widget.documentId,
                           title: _titleController.text,
                           description: _descriptionController.text,
+                          city: _cityController.text,
                         );
 
                         setState(() {

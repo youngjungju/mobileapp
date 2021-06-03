@@ -7,11 +7,13 @@ import 'custom_form_field.dart';
 class AddItemForm extends StatefulWidget {
   final FocusNode titleFocusNode;
   final FocusNode descriptionFocusNode;
+  final FocusNode cityFocusNode;
   final User user;
 
   const AddItemForm({
     required this.titleFocusNode,
     required this.descriptionFocusNode,
+    required this.cityFocusNode,
     required this.user,
   });
 
@@ -26,6 +28,7 @@ class _AddItemFormState extends State<AddItemForm> {
 
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _city = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
 
   @override
@@ -65,6 +68,29 @@ class _AddItemFormState extends State<AddItemForm> {
                   ),
                   label: '이력서 제목',
                   hint: '자신을 어필할 수 있는 이력서 제목을 입력해주세요.',
+                ),
+                SizedBox(height: 24.0),
+                Text(
+                  '지역',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 22.0,
+                    letterSpacing: 1,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 8.0),
+                CustomFormField(
+                  isLabelEnabled: false,
+                  controller: _city,
+                  focusNode: widget.cityFocusNode,
+                  keyboardType: TextInputType.text,
+                  inputAction: TextInputAction.next,
+                  validator: (value) => TitleValidator.validateField(
+                    value: value,
+                  ),
+                  label: '지역',
+                  hint: '포항시 북구 양덕동',
                 ),
                 SizedBox(height: 24.0),
                 Text(
@@ -127,6 +153,7 @@ class _AddItemFormState extends State<AddItemForm> {
                         await Database.addItem(
                           title: _titleController.text,
                           description: _descriptionController.text,
+                          city: _city.text,
                         );
 
                         setState(() {

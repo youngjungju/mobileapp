@@ -11,6 +11,7 @@ class AddScreen extends StatelessWidget {
 
   final FocusNode _titleFocusNode = FocusNode();
   final FocusNode _descriptionFocusNode = FocusNode();
+  final FocusNode _city = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +37,7 @@ class AddScreen extends StatelessWidget {
             child: AddItemForm(
               titleFocusNode: _titleFocusNode,
               descriptionFocusNode: _descriptionFocusNode,
+              cityFocusNode: _city,
               user: _user,
             ),
           ),

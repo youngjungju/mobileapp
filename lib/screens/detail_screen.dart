@@ -40,6 +40,7 @@ class _DetailScreenState extends State<DetailScreen> {
             String docID = widget.documentId;
             String title = noteInfo?.get('title');
             String description = noteInfo?.get('description');
+            String city = noteInfo?.get('city');
             String writer = noteInfo?.get('writer');
             return Scaffold(
               backgroundColor: Colors.indigo,
@@ -56,6 +57,7 @@ class _DetailScreenState extends State<DetailScreen> {
                             Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => EditScreen(
                                 currentTitle: title,
+                                currentCity: city,
                                 currentDescription: description,
                                 documentId: docID,
                               ),
@@ -93,6 +95,18 @@ class _DetailScreenState extends State<DetailScreen> {
                             ),
                             SizedBox(height: 8.0),
                             Container(child: Text(title)),
+                            SizedBox(height: 24.0),
+                            Text(
+                              '지역',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 22.0,
+                                letterSpacing: 1,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: 8.0),
+                            Container(child: Text(city)),
                             SizedBox(height: 24.0),
                             Text(
                               '자기소개서',

@@ -5,11 +5,13 @@ import 'package:mobileapp/widgets/edit_item_form.dart';
 class EditScreen extends StatefulWidget {
   final String currentTitle;
   final String currentDescription;
+  final String currentCity;
   final String documentId;
 
   EditScreen({
     required this.currentTitle,
     required this.currentDescription,
+    required this.currentCity,
     required this.documentId,
   });
 
@@ -21,6 +23,7 @@ class _EditScreenState extends State<EditScreen> {
   final FocusNode _titleFocusNode = FocusNode();
 
   final FocusNode _descriptionFocusNode = FocusNode();
+  final FocusNode _cityFocusNode = FocusNode();
 
   bool _isDeleting = false;
 
@@ -30,6 +33,7 @@ class _EditScreenState extends State<EditScreen> {
       onTap: () {
         _titleFocusNode.unfocus();
         _descriptionFocusNode.unfocus();
+        _cityFocusNode.unfocus();
       },
       child: Scaffold(
         backgroundColor: Colors.indigo,
@@ -89,9 +93,11 @@ class _EditScreenState extends State<EditScreen> {
             child: EditItemForm(
               documentId: widget.documentId,
               titleFocusNode: _titleFocusNode,
+              cityFocusNode: _cityFocusNode,
               descriptionFocusNode: _descriptionFocusNode,
               currentTitle: widget.currentTitle,
               currentDescription: widget.currentDescription,
+              currentCity: widget.currentCity,
             ),
           ),
         ),
