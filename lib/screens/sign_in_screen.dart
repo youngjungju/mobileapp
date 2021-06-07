@@ -9,6 +9,8 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+  List<bool> _selections = [true, false];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,6 +46,40 @@ class _SignInScreenState extends State<SignInScreen> {
                         fontSize: 40,
                       ),
                     ),
+                    SizedBox(height: 24.0,),
+                    ToggleButtons(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                          child: Text(
+                            "일반 로그인",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                          child: Text(
+                            "기업 로그인",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ],
+                      isSelected: _selections,
+                      onPressed: (int newIndex) {
+                        setState(() {
+                          for (int index = 0;
+                              index < _selections.length;
+                              index++) {
+                            if (index == newIndex)
+                              _selections[index] = true;
+                            else
+                              _selections[index] = false;
+                          }
+                        });
+                      },
+                      selectedBorderColor: Colors.orange,
+                      borderWidth: 3.0,
+                    )
                   ],
                 ),
               ),
@@ -53,7 +89,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   if (snapshot.hasError) {
                     return Text('Error initializing Firebase');
                   } else if (snapshot.connectionState == ConnectionState.done) {
-                    return GoogleSignInButton();
+                    return GoogleSignInButton(userType: _selections[0],);
                   }
                   return CircularProgressIndicator(
                     valueColor: AlwaysStoppedAnimation<Color>(

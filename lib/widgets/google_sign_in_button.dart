@@ -2,15 +2,30 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobileapp/screens/home_screen.dart';
+import 'package:mobileapp/screens/reqruit_home_screen.dart';
 import 'package:mobileapp/utils/authentication.dart';
 import 'package:mobileapp/utils/database.dart';
 
 class GoogleSignInButton extends StatefulWidget {
+  const GoogleSignInButton({Key? key, required bool userType})
+      : _isNormal = userType,
+        super(key: key);
+
+  final bool _isNormal;
+
   @override
   _GoogleSignInButtonState createState() => _GoogleSignInButtonState();
 }
 
 class _GoogleSignInButtonState extends State<GoogleSignInButton> {
+  late bool _isNormal;
+  @override
+  void initState() {
+    _isNormal = widget._isNormal;
+
+    super.initState();
+  }
+
   bool _isSigningIn = false;
 
   @override
@@ -44,13 +59,23 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
 
                 if (user != null) {
                   Database.userUid = user.uid;
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => HomeScreen(
-                        user: user,
+                  if (_isNormal) {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => HomeScreen(
+                          user: user,
+                        ),
                       ),
-                    ),
-                  );
+                    );
+                  } else {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => RecruitHomeScreen(
+                          user: user,
+                        ),
+                      ),
+                    );
+                  }
                 }
               },
               child: Padding(
