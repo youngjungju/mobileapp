@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobileapp/screens/home_screen.dart';
-import 'package:mobileapp/screens/reqruit_home_screen.dart';
+import 'package:mobileapp/screens/company_home_screen.dart';
 import 'package:mobileapp/utils/authentication.dart';
 import 'package:mobileapp/utils/database.dart';
 
@@ -70,7 +70,7 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                   } else {
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
-                        builder: (context) => RecruitHomeScreen(
+                        builder: (context) => CompanyHomeScreen(
                           user: user,
                         ),
                       ),
