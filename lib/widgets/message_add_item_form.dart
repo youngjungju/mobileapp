@@ -155,7 +155,7 @@ class _MessageAddItemFormState extends State<MessageAddItemForm> {
                           title: _titleController.text,
                           description: _descriptionController.text,
                           company: _companyController.text,
-                          writer: widget.user.uid,
+                          writer: widget.user.email!,
                           receiver: widget.receiver,
                         );
 

@@ -29,6 +29,7 @@ class _MessageDetailScreenState extends State<MessageDetailScreen> {
             String title = noteInfo?.get('title');
             String description = noteInfo?.get('description');
             String company = noteInfo?.get('company');
+            String email = noteInfo?.get('writer');
             return Scaffold(
               backgroundColor: Colors.indigo,
               appBar: AppBar(
@@ -79,6 +80,8 @@ class _MessageDetailScreenState extends State<MessageDetailScreen> {
                             ),
                             SizedBox(height: 8.0),
                             Container(child: Text(description)),
+                            SizedBox(height: 16.0),
+                            Container(child: Text(email, style: TextStyle(fontSize: 16.0),)),
                           ],
                         ),
                       ),

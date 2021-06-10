@@ -29,6 +29,7 @@ class ItemList extends StatelessWidget {
               String title = noteInfo.get('title');
               String city = noteInfo.get('city');
               String description = noteInfo.get('description');
+              String writerEmail = noteInfo.get('writerEmail');
 
               if (city == _location)
                 return Column(
@@ -50,15 +51,30 @@ class ItemList extends StatelessWidget {
                             ),
                           ),
                         ),
-                        title: Text(
-                          title,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+                        title: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: Text(
+                            title,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
-                        subtitle: Text(
-                          description,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              description,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            SizedBox(height: 8.0,),
+                            Text(
+                              writerEmail,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            SizedBox(height: 8.0,),
+                          ],
                         ),
                         trailing: Text(
                           city,

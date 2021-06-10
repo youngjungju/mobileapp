@@ -52,9 +52,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 PopupMenuItem(value: "장량동", child: Text("장량동")),
                 PopupMenuItem(value: "두호동", child: Text("두호동")),
                 PopupMenuItem(value: "장성동", child: Text("장성동")),
-                PopupMenuItem(value: "중앙동", child: Text("중앙동")),
-                PopupMenuItem(value: "용흥동", child: Text("용흥동")),
-                PopupMenuItem(value: "황성동", child: Text("황성동")),
               ];
             },
             child: Row(

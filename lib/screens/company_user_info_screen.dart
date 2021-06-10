@@ -127,8 +127,9 @@ class _CompanyUserInfoScreenState extends State<CompanyUserInfoScreen> {
                   Text(
                     '기업 로그인',
                     style: TextStyle(
-                        color: Colors.grey, fontSize: 14, letterSpacing: 0.2),
+                        color: Colors.white70, fontSize: 20, letterSpacing: 0.2),
                   ),
+                  SizedBox(height: 8.0,),
                   Text(
                     '구글 계정 로그인',
                     style: TextStyle(

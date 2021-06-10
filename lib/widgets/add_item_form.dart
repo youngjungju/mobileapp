@@ -154,6 +154,7 @@ class _AddItemFormState extends State<AddItemForm> {
                           title: _titleController.text,
                           description: _descriptionController.text,
                           city: _city.text,
+                          writerEmail: widget.user.email!,
                         );
 
                         setState(() {
