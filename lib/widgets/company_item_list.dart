@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mobileapp/screens/company_detail_screen.dart';
 import 'package:mobileapp/screens/detail_screen.dart';
 import 'package:mobileapp/utils/database.dart';
 
-class ItemList extends StatelessWidget {
-  ItemList({Key? key, required User user, required String where})
+class CompanyItemList extends StatelessWidget {
+  CompanyItemList({Key? key, required User user, required String where})
       : _user = user,
         _location = where,
         super(key: key);
@@ -22,6 +23,7 @@ class ItemList extends StatelessWidget {
           return Text('Something went wrong');
         } else if (snapshot.hasData || snapshot.data != null) {
           return ListView.builder(
+
             itemCount: snapshot.data!.docs.length,
             itemBuilder: (context, index) {
               var noteInfo = snapshot.data!.docs[index];
@@ -44,7 +46,7 @@ class ItemList extends StatelessWidget {
                         ),
                         onTap: () => Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => DetailScreen(
+                            builder: (context) => CompanyDetailScreen(
                               documentId: docID,
                               user: _user,
                             ),

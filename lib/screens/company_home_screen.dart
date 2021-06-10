@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:mobileapp/screens/user_info_screen.dart';
-import 'package:mobileapp/screens/add_screen.dart';
-import 'package:mobileapp/widgets/item_list.dart';
+import 'package:mobileapp/widgets/company_item_list.dart';
 
 import 'company_user_info_screen.dart';
 
-class RecruitHomeScreen extends StatefulWidget {
-  const RecruitHomeScreen({Key? key, required User user})
+class CompanyHomeScreen extends StatefulWidget {
+  const CompanyHomeScreen({Key? key, required User user})
       : _user = user,
         super(key: key);
 
   final User _user;
 
   @override
-  _RecruitHomeScreenState createState() => _RecruitHomeScreenState();
+  _CompanyHomeScreenState createState() => _CompanyHomeScreenState();
 }
 
-class _RecruitHomeScreenState extends State<RecruitHomeScreen> {
+class _CompanyHomeScreenState extends State<CompanyHomeScreen> {
   late User _user;
+  late String currentLocation;
 
   @override
   void initState() {
     _user = widget._user;
+    currentLocation = "양덕동";
 
     super.initState();
   }
@@ -35,7 +35,37 @@ class _RecruitHomeScreenState extends State<RecruitHomeScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.indigo,
-        title: Text("전체 인재"),
+        title: GestureDetector(
+          onTap: () {
+            print("click");
+          },
+          child: PopupMenuButton<String>(
+            offset: Offset(0,30),
+            onSelected: (String where){
+              setState(() {
+                currentLocation = where;
+              });
+            },
+            itemBuilder: (BuildContext context) {
+              return [
+                PopupMenuItem(value: "양덕동",child: Text("양덕동")),
+                PopupMenuItem(value: "장량동",child: Text("장량동")),
+                PopupMenuItem(value: "두호동",child: Text("두호동")),
+                PopupMenuItem(value: "장성동",child: Text("장성동")),
+                PopupMenuItem(value: "중앙동",child: Text("중앙동")),
+                PopupMenuItem(value: "용흥동",child: Text("용흥동")),
+                PopupMenuItem(value: "황성동",child: Text("황성동")),
+              ];
+            },
+            child: Row(
+              children: [
+                Text(currentLocation),
+                Icon(Icons.arrow_drop_down),
+              ],
+            ),
+          ),
+        ),
+        //title: Text("전체 인재"),
         actions: [
           Padding(
               padding: const EdgeInsets.all(5.0),
@@ -80,7 +110,7 @@ class _RecruitHomeScreenState extends State<RecruitHomeScreen> {
             right: 16.0,
             bottom: 20.0,
           ),
-          child: ItemList(user: _user),
+          child: CompanyItemList(user: _user, where: currentLocation),
         ),
       ),
     );
