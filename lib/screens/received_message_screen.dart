@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:mobileapp/widgets/item_list.dart';
+import 'package:mobileapp/widgets/message_list.dart';
 
 class MessagesScreen extends StatefulWidget {
   const MessagesScreen({Key? key, required User user})
@@ -40,7 +40,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
             right: 16.0,
             bottom: 20.0,
           ),
-          child: Text("Hi"),//여기에 리스트 뿌려주는 위젯 연결시키기
+          child: MessageList(user: _user),
         ),
       ),
     );
