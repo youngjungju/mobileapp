@@ -10,6 +10,7 @@ class Database {
     required String title,
     required String description,
     required String city,
+    required String writerEmail,
   }) async {
     DocumentReference documentReferencer =
     _mainCollection.doc();
@@ -19,6 +20,7 @@ class Database {
       "description": description,
       "city" : city,
       "writer": userUid,
+      "writerEmail": writerEmail,
     };
 
     await documentReferencer
