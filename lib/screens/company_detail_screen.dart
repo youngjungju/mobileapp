@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'edit_screen.dart';
+import 'message_add_screen.dart';
 
 class CompanyDetailScreen extends StatefulWidget {
   final String documentId;
@@ -104,6 +105,39 @@ class _CompanyDetailScreenState extends State<CompanyDetailScreen> {
                             ),
                             SizedBox(height: 8.0),
                             Container(child: Text(description)),
+                            SizedBox(height: 24.0,),
+                            ElevatedButton(
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                  Colors.blueAccent,
+                                ),
+                                shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                              ),
+                              onPressed: () {
+                                  Navigator.push(context, MaterialPageRoute(
+                                    builder: (context) => MessageAddScreen(
+                                      user: _user,
+                                      receiver: writer,
+                                    ),
+                                  ));
+                              },
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
+                                child: Text(
+                                  '메세지 보내기',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                    letterSpacing: 2,
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),

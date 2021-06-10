@@ -1,40 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:mobileapp/utils/database.dart';
+import 'package:mobileapp/utils/message.dart';
 import 'package:mobileapp/utils/validator.dart';
 import 'custom_form_field.dart';
 
-class AddItemForm extends StatefulWidget {
+class MessageAddItemForm extends StatefulWidget {
   final FocusNode titleFocusNode;
   final FocusNode descriptionFocusNode;
-  final FocusNode cityFocusNode;
+  final FocusNode companyFocusNode;
   final User user;
+  final String receiver;
 
-  const AddItemForm({
+  const MessageAddItemForm({
     required this.titleFocusNode,
     required this.descriptionFocusNode,
-    required this.cityFocusNode,
+    required this.companyFocusNode,
     required this.user,
+    required this.receiver,
   });
 
   @override
-  _AddItemFormState createState() => _AddItemFormState();
+  _MessageAddItemFormState createState() => _MessageAddItemFormState();
 }
 
-class _AddItemFormState extends State<AddItemForm> {
-  final _addItemFormKey = GlobalKey<FormState>();
+class _MessageAddItemFormState extends State<MessageAddItemForm> {
+  final _messageAddItemFormKey = GlobalKey<FormState>();
 
   bool _isProcessing = false;
 
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
-  final TextEditingController _city = TextEditingController();
-  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _companyController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: _addItemFormKey,
+      key: _messageAddItemFormKey,
       child: ListView(
         children: [
           Padding(
@@ -48,7 +49,7 @@ class _AddItemFormState extends State<AddItemForm> {
               children: [
                 SizedBox(height: 24.0),
                 Text(
-                  '이력서 제목',
+                  '메세지 제목',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 22.0,
@@ -66,12 +67,12 @@ class _AddItemFormState extends State<AddItemForm> {
                   validator: (value) => TitleValidator.validateField(
                     value: value,
                   ),
-                  label: '이력서 제목',
-                  hint: '자신을 어필할 수 있는 이력서 제목을 입력해주세요.',
+                  label: '메세지 제목',
+                  hint: '메세지 제목을 입력해주세요.',
                 ),
                 SizedBox(height: 24.0),
                 Text(
-                  '지역',
+                  '회사 이름',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 22.0,
@@ -82,19 +83,19 @@ class _AddItemFormState extends State<AddItemForm> {
                 SizedBox(height: 8.0),
                 CustomFormField(
                   isLabelEnabled: false,
-                  controller: _city,
-                  focusNode: widget.cityFocusNode,
+                  controller: _companyController,
+                  focusNode: widget.companyFocusNode,
                   keyboardType: TextInputType.text,
                   inputAction: TextInputAction.next,
                   validator: (value) => TitleValidator.validateField(
                     value: value,
                   ),
-                  label: '지역',
-                  hint: '거주하시는 동 이름을 입력해주세요.',
+                  label: '회사 이름',
+                  hint: '회사 이름을 입력해주세요.',
                 ),
                 SizedBox(height: 24.0),
                 Text(
-                  '자기소개서',
+                  '메세지 입력',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 22.0,
@@ -113,8 +114,8 @@ class _AddItemFormState extends State<AddItemForm> {
                   validator: (value) => TextValidator.validateField(
                     value: value,
                   ),
-                  label: '자기소개서',
-                  hint: '간단한 자기소개를 입력해주세요.(500자 이내)',
+                  label: '메세지 입력',
+                  hint: '보내실 메세지를 입력해주세요.(500자 이내)',
                 ),
               ],
             ),
@@ -145,15 +146,17 @@ class _AddItemFormState extends State<AddItemForm> {
                       widget.titleFocusNode.unfocus();
                       widget.descriptionFocusNode.unfocus();
 
-                      if (_addItemFormKey.currentState!.validate()) {
+                      if (_messageAddItemFormKey.currentState!.validate()) {
                         setState(() {
                           _isProcessing = true;
                         });
 
-                        await Database.addItem(
+                        await Message.addItem(
                           title: _titleController.text,
                           description: _descriptionController.text,
-                          city: _city.text,
+                          company: _companyController.text,
+                          writer: widget.user.uid,
+                          receiver: widget.receiver,
                         );
 
                         setState(() {
@@ -166,7 +169,7 @@ class _AddItemFormState extends State<AddItemForm> {
                     child: Padding(
                       padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
                       child: Text(
-                        '이력서 추가',
+                        '메세지 전송',
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,

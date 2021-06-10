@@ -40,21 +40,18 @@ class _CompanyHomeScreenState extends State<CompanyHomeScreen> {
             print("click");
           },
           child: PopupMenuButton<String>(
-            offset: Offset(0,30),
-            onSelected: (String where){
+            offset: Offset(0, 30),
+            onSelected: (String where) {
               setState(() {
                 currentLocation = where;
               });
             },
             itemBuilder: (BuildContext context) {
               return [
-                PopupMenuItem(value: "양덕동",child: Text("양덕동")),
-                PopupMenuItem(value: "장량동",child: Text("장량동")),
-                PopupMenuItem(value: "두호동",child: Text("두호동")),
-                PopupMenuItem(value: "장성동",child: Text("장성동")),
-                PopupMenuItem(value: "중앙동",child: Text("중앙동")),
-                PopupMenuItem(value: "용흥동",child: Text("용흥동")),
-                PopupMenuItem(value: "황성동",child: Text("황성동")),
+                PopupMenuItem(value: "양덕동", child: Text("양덕동")),
+                PopupMenuItem(value: "장량동", child: Text("장량동")),
+                PopupMenuItem(value: "두호동", child: Text("두호동")),
+                PopupMenuItem(value: "장성동", child: Text("장성동")),
               ];
             },
             child: Row(
@@ -71,24 +68,30 @@ class _CompanyHomeScreenState extends State<CompanyHomeScreen> {
               padding: const EdgeInsets.all(5.0),
               child: IconButton(
                 icon: _user.photoURL != null
-                    ? ClipOval(
-                        child: Material(
-                          color: Colors.grey,
-                          child: Image.network(
-                            _user.photoURL!,
-                            fit: BoxFit.fitHeight,
+                    ? Hero(
+                        tag: 'profile',
+                        child: ClipOval(
+                          child: Material(
+                            color: Colors.grey,
+                            child: Image.network(
+                              _user.photoURL!,
+                              fit: BoxFit.fitHeight,
+                            ),
                           ),
                         ),
                       )
-                    : ClipOval(
-                        child: Material(
-                          color: Colors.grey,
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Icon(
-                              Icons.person,
-                              size: 10,
-                              color: Colors.grey,
+                    : Hero(
+                        tag: 'profile',
+                        child: ClipOval(
+                          child: Material(
+                            color: Colors.grey,
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Icon(
+                                Icons.person,
+                                size: 10,
+                                color: Colors.grey,
+                              ),
                             ),
                           ),
                         ),
@@ -97,7 +100,8 @@ class _CompanyHomeScreenState extends State<CompanyHomeScreen> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => CompanyUserInfoScreen(user: _user),
+                        builder: (context) =>
+                            CompanyUserInfoScreen(user: _user),
                       ));
                 },
               ))
