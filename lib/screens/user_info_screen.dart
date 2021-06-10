@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mobileapp/screens/sign_in_screen.dart';
 import 'package:mobileapp/utils/authentication.dart';
 import 'package:mobileapp/widgets/my_item_list.dart';
+import 'package:mobileapp/screens/received_message_screen.dart';
 
 class UserInfoScreen extends StatefulWidget {
   const UserInfoScreen({Key? key, required User user})
@@ -54,6 +55,22 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
         elevation: 0,
         backgroundColor: Colors.indigo,
         title: Text("프로필"),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => MessagesScreen(
+                    user: _user,
+                  ),
+                ));
+              },
+              icon: Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: Icon(
+                  Icons.message,
+                ),
+              ))
+        ],
       ),
       body: SafeArea(
         child: Column(
@@ -77,24 +94,29 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                     width: 100,
                     height: 100,
                     child: _user.photoURL != null
-                        ? ClipOval(
-                            child: Material(
-                              color: Colors.grey,
-                              child: Image.network(
-                                _user.photoURL!,
-                                fit: BoxFit.fitHeight,
+                        ? Hero(
+                            tag: 'profile',
+                            child: ClipOval(
+                              child: Material(
+                                color: Colors.grey,
+                                child: Image.network(
+                                  _user.photoURL!,
+                                  fit: BoxFit.fitHeight,
+                                ),
                               ),
-                            ),
-                          )
-                        : ClipOval(
-                            child: Material(
-                              color: Colors.grey,
-                              child: Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Icon(
-                                  Icons.person,
-                                  size: 60,
-                                  color: Colors.grey,
+                            ))
+                        : Hero(
+                            tag: 'profile',
+                            child: ClipOval(
+                              child: Material(
+                                color: Colors.grey,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Icon(
+                                    Icons.person,
+                                    size: 60,
+                                    color: Colors.grey,
+                                  ),
                                 ),
                               ),
                             ),

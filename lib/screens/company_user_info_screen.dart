@@ -77,24 +77,30 @@ class _CompanyUserInfoScreenState extends State<CompanyUserInfoScreen> {
                     width: 100,
                     height: 100,
                     child: _user.photoURL != null
-                        ? ClipOval(
-                            child: Material(
-                              color: Colors.grey,
-                              child: Image.network(
-                                _user.photoURL!,
-                                fit: BoxFit.fitHeight,
+                        ? Hero(
+                            tag: 'profile',
+                            child: ClipOval(
+                              child: Material(
+                                color: Colors.grey,
+                                child: Image.network(
+                                  _user.photoURL!,
+                                  fit: BoxFit.fitHeight,
+                                ),
                               ),
                             ),
                           )
-                        : ClipOval(
-                            child: Material(
-                              color: Colors.grey,
-                              child: Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Icon(
-                                  Icons.person,
-                                  size: 60,
-                                  color: Colors.grey,
+                        : Hero(
+                            tag: 'profile',
+                            child: ClipOval(
+                              child: Material(
+                                color: Colors.grey,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Icon(
+                                    Icons.person,
+                                    size: 60,
+                                    color: Colors.grey,
+                                  ),
                                 ),
                               ),
                             ),
@@ -118,9 +124,11 @@ class _CompanyUserInfoScreenState extends State<CompanyUserInfoScreen> {
                     ),
                   ),
                   SizedBox(height: 8.0),
-                  Text('기업 로그인',
+                  Text(
+                    '기업 로그인',
                     style: TextStyle(
-                        color: Colors.grey, fontSize: 14, letterSpacing: 0.2),),
+                        color: Colors.grey, fontSize: 14, letterSpacing: 0.2),
+                  ),
                   Text(
                     '구글 계정 로그인',
                     style: TextStyle(
